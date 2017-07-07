@@ -1,6 +1,7 @@
 
 #define PIN_TMP36 A2
 #define CONSIGNA 25
+#define HISTERESIS 1
 #define PIN_BUZZER 8
 #define NOTE_C5  523  //Frecuencia de sonido del buzzer
 boolean Alarma = LOW;
@@ -12,7 +13,7 @@ void setup() {
   float voltage = (sensorVal / 1023.0) * 5.0;
   float temperature = (voltage - 0.5) * 100;
   //Serial.println(temperature);//en temperature tengo la temperatura
-  if (temperature > 28) {
+  if (temperature > CONSIGNA+HISTERESIS) {
     Alarma_anterior = HIGH;
   }
 
@@ -26,7 +27,7 @@ void loop() {
   float temperature = (voltage - 0.5) * 100;
   Serial.println(temperature);//en temperature tengo la temperatura
   delay(1000);
-  if ((temperature >= CONSIGNA + 1) && (Alarma_anterior == LOW))
+  if ((temperature >= CONSIGNA + HISTERESIS) && (Alarma_anterior == LOW))
   {
     Serial.println("ALARMA");
     Alarma_anterior = HIGH;
