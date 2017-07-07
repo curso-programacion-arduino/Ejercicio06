@@ -1,5 +1,5 @@
 #define PIN_TMP36 A2
-#define UMBRAL 28.00
+float UMBRAL = 28.00;
 #define PIN_BUZZER 8
 
 #define NOTE_C5  523  //Frecuencia de sonido del buzzer
@@ -15,12 +15,14 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   if   (lee_temperatura() >= UMBRAL) {
+    UMBRAL = 27;
     Serial.println("ALARMA");
     Serial.println(lee_temperatura());
     tone(PIN_BUZZER, NOTE_C5);
   } else {
     Serial.println("RECUPERACION");
     noTone(PIN_BUZZER);
+    UMBRAL = 29;
   }
 
 }
