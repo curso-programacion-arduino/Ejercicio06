@@ -23,14 +23,19 @@ void setup()
 
   if (lee_temperatura () > UMBRAL) // funcion "lee_temperatura()"
   {
-    alarma_temperatura = true;
-    tone(PIN_BUZZER, NOTE_C5);
-    Serial.println("ALARMA!!");
+     if (alarma_temperatura == false) {
+        alarma_temperatura = true;
+        tone(PIN_BUZZER, NOTE_C5);
+        Serial.println("ALARMA!!");
+        
+     }
   }
   else
   {
-    alarma_temperatura = false;
-    noTone(PIN_BUZZER);
+     if (alarma_temperatura == true) {
+        alarma_temperatura = false;
+        noTone(PIN_BUZZER);
+     }
   }
 }
 
